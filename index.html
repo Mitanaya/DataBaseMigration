@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Migration Toolkit</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-database"></i>
+                <h1>Database Migration Toolkit</h1>
+            </div>
+            <p class="tagline">Seamlessly migrate between any database systems with automated scripts and documentation</p>
+        </header>
+
+        <div class="tool-container">
+            <div class="migration-form">
+                <div class="form-section">
+                    <h2><i class="fas fa-cog"></i> Migration Configuration</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sourceDb">Source Database</label>
+                            <select id="sourceDb" class="select-dropdown">
+                                <option value="">Select source database</option>
+                                <option value="mysql">MySQL</option>
+                                <option value="postgresql">PostgreSQL</option>
+                                <option value="oracle">Oracle</option>
+                                <option value="sqlserver">SQL Server</option>
+                                <option value="mongodb">MongoDB</option>
+                                <option value="sqlite">SQLite</option>
+                                <option value="mariadb">MariaDB</option>
+                                <option value="db2">IBM DB2</option>
+                                <option value="cassandra">Cassandra</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetDb">Target Database</label>
+                            <select id="targetDb" class="select-dropdown">
+                                <option value="">Select target database</option>
+                                <option value="mysql">MySQL</option>
+                                <option value="postgresql">PostgreSQL</option>
+                                <option value="oracle">Oracle</option>
+                                <option value="sqlserver">SQL Server</option>
+                                <option value="mongodb">MongoDB</option>
+                                <option value="sqlite">SQLite</option>
+                                <option value="mariadb">MariaDB</option>
+                                <option value="db2">IBM DB2</option>
+                                <option value="cassandra">Cassandra</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="connectionSource">Source Connection String</label>
+                            <input type="text" id="connectionSource" placeholder="e.g., server=localhost;database=test;user=root">
+                        </div>
+                        <div class="form-group">
+                            <label for="connectionTarget">Target Connection String</label>
+                            <input type="text" id="connectionTarget" placeholder="e.g., postgresql://user:pass@localhost:5432/db">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="schemaOptions">Schema Options</label>
+                            <select id="schemaOptions" class="select-dropdown" multiple>
+                                <option value="tables">Tables</option>
+                                <option value="views">Views</option>
+                                <option value="procedures">Stored Procedures</option>
+                                <option value="functions">Functions</option>
+                                <option value="triggers">Triggers</option>
+                                <option value="indexes">Indexes</option>
+                                <option value="constraints">Constraints</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataOptions">Data Options</label>
+                            <select id="dataOptions" class="select-dropdown" multiple>
+                                <option value="all">All Data</option>
+                                <option value="partial">Partial Data</option>
+                                <option value="sampled">Sampled Data</option>
+                                <option value="none">No Data</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deploymentType">Deployment Type</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="deploymentType" value="standalone" checked>
+                                <span class="radio-checkmark"></span>
+                                Standalone
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="deploymentType" value="cluster">
+                                <span class="radio-checkmark"></span>
+                                Cluster
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="deploymentType" value="ha">
+                                <span class="radio-checkmark"></span>
+                                High Availability
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="deploymentType" value="dr">
+                                <span class="radio-checkmark"></span>
+                                Disaster Recovery
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outputOptions">Output Options</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="generateScripts" checked>
+                                <span class="checkbox-checkmark"></span>
+                                Generate Migration Scripts
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="generateDocs" checked>
+                                <span class="checkbox-checkmark"></span>
+                                Generate Documentation
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="generateTest">
+                                <span class="checkbox-checkmark"></span>
+                                Generate Test Cases
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="generateRollback">
+                                <span class="checkbox-checkmark"></span>
+                                Generate Rollback Scripts
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-file-alt"></i> Additional Requirements</h2>
+                    <div class="form-group">
+                        <label for="specialRequirements">Special Requirements</label>
+                        <textarea id="specialRequirements" rows="3" placeholder="Any special requirements like character encoding, timezone handling, etc."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="migrationStrategy">Migration Strategy</label>
+                        <select id="migrationStrategy" class="select-dropdown">
+                            <option value="bigbang">Big Bang Migration</option>
+                            <option value="parallel">Parallel Run</option>
+                            <option value="phased">Phased Migration</option>
+                            <option value="trickle">Trickle Feed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="generateBtn" class="generate-btn">
+                    <i class="fas fa-magic"></i> Generate Migration Plan
+                </button>
+            </div>
+
+            <div class="results-panel" id="resultsPanel">
+                <div class="results-header">
+                    <h2><i class="fas fa-file-code"></i> Migration Output</h2>
+                    <div class="result-tabs">
+                        <button class="tab-btn active" data-tab="plan">Migration Plan</button>
+                        <button class="tab-btn" data-tab="scripts">Scripts</button>
+                        <button class="tab-btn" data-tab="docs">Documentation</button>
+                        <button class="tab-btn" data-tab="resources">Resources</button>
+                    </div>
+                </div>
+                <div class="results-content">
+                    <div id="planTab" class="tab-content active">
+                        <div class="placeholder-content">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <p>Configure your migration above and click "Generate Migration Plan" to see results</p>
+                        </div>
+                    </div>
+                    <div id="scriptsTab" class="tab-content">
+                        <div class="placeholder-content">
+                            <i class="fas fa-code"></i>
+                            <p>Generated scripts will appear here</p>
+                        </div>
+                    </div>
+                    <div id="docsTab" class="tab-content">
+                        <div class="placeholder-content">
+                            <i class="fas fa-book"></i>
+                            <p>Generated documentation will appear here</p>
+                        </div>
+                    </div>
+                    <div id="resourcesTab" class="tab-content">
+                        <div class="placeholder-content">
+                            <i class="fas fa-link"></i>
+                            <p>Helpful resources and links will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button class="action-btn download-btn">
+                        <i class="fas fa-download"></i> Download All
+                    </button>
+                    <button class="action-btn save-btn">
+                        <i class="fas fa-save"></i> Save Configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2><i class="fas fa-star"></i> Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Cross-Platform Migration</h3>
+                    <p>Migrate between any database systems with automated schema conversion and data transfer.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>Comprehensive Documentation</h3>
+                    <p>Generate detailed migration documentation including step-by-step guides and best practices.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Automated Scripts</h3>
+                    <p>Get ready-to-use scripts for schema conversion, data migration, and validation.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-server"></i>
+                    <h3>Deployment Options</h3>
+                    <p>Support for standalone, cluster, high availability, and disaster recovery setups.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Database Migration Toolkit - Free Open Source Tool</p>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#"><i class="fas fa-book"></i> Documentation</a>
+            <a href="#"><i class="fas fa-question-circle"></i> Support</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
